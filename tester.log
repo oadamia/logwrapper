@@ -1,0 +1,143 @@
+{"level":"error","caller":"Projects/microsena/logwrapper/loggerwrapper_test.go:73","@timestamp":"2008-01-08T17:05:05","message":"SetPrefix is not implemented"}
+{"level":"debug","@timestamp":"2008-01-08T17:05:05","message":"test"}
+{"level":"debug","@timestamp":"2008-01-08T17:05:05","message":"t:test"}
+{"level":"debug","@timestamp":"2008-01-08T17:05:05","message":"test"}
+{"level":"debug","@timestamp":"2008-01-08T17:05:05","message":"t:test"}
+{"level":"info","@timestamp":"2008-01-08T17:05:05","message":"test"}
+{"level":"info","@timestamp":"2008-01-08T17:05:05","message":"t:test"}
+{"level":"warn","@timestamp":"2008-01-08T17:05:05","message":"test"}
+{"level":"warn","@timestamp":"2008-01-08T17:05:05","message":"t:test"}
+{"level":"error","caller":"Projects/microsena/logwrapper/loggerwrapper_test.go:73","@timestamp":"2008-01-08T17:05:05","message":"test"}
+{"level":"error","caller":"Projects/microsena/logwrapper/loggerwrapper_test.go:73","@timestamp":"2008-01-08T17:05:05","message":"t:test"}
+{"level":"error","caller":"Projects/microsena/logwrapper/loggerwrapper_test.go:73","@timestamp":"2008-01-08T17:05:05","message":"SetPrefix is not implemented"}
+{"level":"debug","@timestamp":"2008-01-08T17:05:05","message":"test"}
+{"level":"debug","@timestamp":"2008-01-08T17:05:05","message":"t:test"}
+{"level":"debug","@timestamp":"2008-01-08T17:05:05","message":"test"}
+{"level":"debug","@timestamp":"2008-01-08T17:05:05","message":"t:test"}
+{"level":"info","@timestamp":"2008-01-08T17:05:05","message":"test"}
+{"level":"info","@timestamp":"2008-01-08T17:05:05","message":"t:test"}
+{"level":"warn","@timestamp":"2008-01-08T17:05:05","message":"test"}
+{"level":"warn","@timestamp":"2008-01-08T17:05:05","message":"t:test"}
+{"level":"error","caller":"Projects/microsena/logwrapper/loggerwrapper_test.go:73","@timestamp":"2008-01-08T17:05:05","message":"test"}
+{"level":"error","caller":"Projects/microsena/logwrapper/loggerwrapper_test.go:73","@timestamp":"2008-01-08T17:05:05","message":"t:test"}
+{"level":"error","caller":"Projects/microsena/logwrapper/loggerwrapper_test.go:73","@timestamp":"2008-01-08T17:05:05","message":"SetPrefix is not implemented"}
+{"level":"debug","@timestamp":"2008-01-08T17:05:05","message":"test"}
+{"level":"debug","@timestamp":"2008-01-08T17:05:05","message":"t:test"}
+{"level":"debug","@timestamp":"2008-01-08T17:05:05","message":"test"}
+{"level":"debug","@timestamp":"2008-01-08T17:05:05","message":"t:test"}
+{"level":"info","@timestamp":"2008-01-08T17:05:05","message":"test"}
+{"level":"info","@timestamp":"2008-01-08T17:05:05","message":"t:test"}
+{"level":"warn","@timestamp":"2008-01-08T17:05:05","message":"test"}
+{"level":"warn","@timestamp":"2008-01-08T17:05:05","message":"t:test"}
+{"level":"error","caller":"Projects/microsena/logwrapper/loggerwrapper_test.go:73","@timestamp":"2008-01-08T17:05:05","message":"test"}
+{"level":"error","caller":"Projects/microsena/logwrapper/loggerwrapper_test.go:73","@timestamp":"2008-01-08T17:05:05","message":"t:test"}
+{"level":"error","caller":"Projects/microsena/logwrapper/loggerwrapper_test.go:73","@timestamp":"2008-01-08T17:05:05","message":"SetPrefix is not implemented"}
+{"level":"debug","@timestamp":"2008-01-08T17:05:05","message":"test"}
+{"level":"debug","@timestamp":"2008-01-08T17:05:05","message":"t:test"}
+{"level":"debug","@timestamp":"2008-01-08T17:05:05","message":"test"}
+{"level":"debug","@timestamp":"2008-01-08T17:05:05","message":"t:test"}
+{"level":"info","@timestamp":"2008-01-08T17:05:05","message":"test"}
+{"level":"info","@timestamp":"2008-01-08T17:05:05","message":"t:test"}
+{"level":"warn","@timestamp":"2008-01-08T17:05:05","message":"test"}
+{"level":"warn","@timestamp":"2008-01-08T17:05:05","message":"t:test"}
+{"level":"error","caller":"Projects/microsena/logwrapper/loggerwrapper_test.go:73","@timestamp":"2008-01-08T17:05:05","message":"test"}
+{"level":"error","caller":"Projects/microsena/logwrapper/loggerwrapper_test.go:73","@timestamp":"2008-01-08T17:05:05","message":"t:test"}
+{"level":"error","caller":"Projects/microsena/logwrapper/loggerwrapper_test.go:73","@timestamp":"2008-01-08T17:05:05","message":"SetPrefix is not implemented"}
+{"level":"debug","@timestamp":"2008-01-08T17:05:05","message":"test"}
+{"level":"debug","@timestamp":"2008-01-08T17:05:05","message":"t:test"}
+{"level":"debug","@timestamp":"2008-01-08T17:05:05","message":"test"}
+{"level":"debug","@timestamp":"2008-01-08T17:05:05","message":"t:test"}
+{"level":"info","@timestamp":"2008-01-08T17:05:05","message":"test"}
+{"level":"info","@timestamp":"2008-01-08T17:05:05","message":"t:test"}
+{"level":"warn","@timestamp":"2008-01-08T17:05:05","message":"test"}
+{"level":"warn","@timestamp":"2008-01-08T17:05:05","message":"t:test"}
+{"level":"error","caller":"Projects/microsena/logwrapper/loggerwrapper_test.go:73","@timestamp":"2008-01-08T17:05:05","message":"test"}
+{"level":"error","caller":"Projects/microsena/logwrapper/loggerwrapper_test.go:73","@timestamp":"2008-01-08T17:05:05","message":"t:test"}
+{"level":"error","caller":"Projects/microsena/logwrapper/loggerwrapper_test.go:73","@timestamp":"2008-01-08T17:05:05","message":"SetPrefix is not implemented"}
+{"level":"debug","@timestamp":"2008-01-08T17:05:05","message":"test"}
+{"level":"debug","@timestamp":"2008-01-08T17:05:05","message":"t:test"}
+{"level":"debug","@timestamp":"2008-01-08T17:05:05","message":"test"}
+{"level":"debug","@timestamp":"2008-01-08T17:05:05","message":"t:test"}
+{"level":"info","@timestamp":"2008-01-08T17:05:05","message":"test"}
+{"level":"info","@timestamp":"2008-01-08T17:05:05","message":"t:test"}
+{"level":"warn","@timestamp":"2008-01-08T17:05:05","message":"test"}
+{"level":"warn","@timestamp":"2008-01-08T17:05:05","message":"t:test"}
+{"level":"error","caller":"Projects/microsena/logwrapper/loggerwrapper_test.go:73","@timestamp":"2008-01-08T17:05:05","message":"test"}
+{"level":"error","caller":"Projects/microsena/logwrapper/loggerwrapper_test.go:73","@timestamp":"2008-01-08T17:05:05","message":"t:test"}
+{"level":"error","caller":"Projects/microsena/logwrapper/loggerwrapper_test.go:73","@timestamp":"2008-01-08T17:05:05","message":"SetPrefix is not implemented"}
+{"level":"debug","@timestamp":"2008-01-08T17:05:05","message":"test"}
+{"level":"debug","@timestamp":"2008-01-08T17:05:05","message":"t:test"}
+{"level":"debug","@timestamp":"2008-01-08T17:05:05","message":"test"}
+{"level":"debug","@timestamp":"2008-01-08T17:05:05","message":"t:test"}
+{"level":"info","@timestamp":"2008-01-08T17:05:05","message":"test"}
+{"level":"info","@timestamp":"2008-01-08T17:05:05","message":"t:test"}
+{"level":"warn","@timestamp":"2008-01-08T17:05:05","message":"test"}
+{"level":"warn","@timestamp":"2008-01-08T17:05:05","message":"t:test"}
+{"level":"error","caller":"Projects/microsena/logwrapper/loggerwrapper_test.go:73","@timestamp":"2008-01-08T17:05:05","message":"test"}
+{"level":"error","caller":"Projects/microsena/logwrapper/loggerwrapper_test.go:73","@timestamp":"2008-01-08T17:05:05","message":"t:test"}
+{"level":"error","caller":"Projects/microsena/logwrapper/loggerwrapper_test.go:73","@timestamp":"2008-01-08T17:05:05","message":"SetPrefix is not implemented"}
+{"level":"debug","@timestamp":"2008-01-08T17:05:05","message":"test"}
+{"level":"debug","@timestamp":"2008-01-08T17:05:05","message":"t:test"}
+{"level":"debug","@timestamp":"2008-01-08T17:05:05","message":"test"}
+{"level":"debug","@timestamp":"2008-01-08T17:05:05","message":"t:test"}
+{"level":"info","@timestamp":"2008-01-08T17:05:05","message":"test"}
+{"level":"info","@timestamp":"2008-01-08T17:05:05","message":"t:test"}
+{"level":"warn","@timestamp":"2008-01-08T17:05:05","message":"test"}
+{"level":"warn","@timestamp":"2008-01-08T17:05:05","message":"t:test"}
+{"level":"error","caller":"Projects/microsena/logwrapper/loggerwrapper_test.go:73","@timestamp":"2008-01-08T17:05:05","message":"test"}
+{"level":"error","caller":"Projects/microsena/logwrapper/loggerwrapper_test.go:73","@timestamp":"2008-01-08T17:05:05","message":"t:test"}
+{"level":"error","caller":"Projects/microsena/logwrapper/loggerwrapper_test.go:73","@timestamp":"2008-01-08T17:05:05","message":"SetPrefix is not implemented"}
+{"level":"debug","@timestamp":"2008-01-08T17:05:05","message":"test"}
+{"level":"debug","@timestamp":"2008-01-08T17:05:05","message":"t:test"}
+{"level":"debug","@timestamp":"2008-01-08T17:05:05","message":"test"}
+{"level":"debug","@timestamp":"2008-01-08T17:05:05","message":"t:test"}
+{"level":"info","@timestamp":"2008-01-08T17:05:05","message":"test"}
+{"level":"info","@timestamp":"2008-01-08T17:05:05","message":"t:test"}
+{"level":"warn","@timestamp":"2008-01-08T17:05:05","message":"test"}
+{"level":"warn","@timestamp":"2008-01-08T17:05:05","message":"t:test"}
+{"level":"error","caller":"Projects/microsena/logwrapper/loggerwrapper_test.go:73","@timestamp":"2008-01-08T17:05:05","message":"test"}
+{"level":"error","caller":"Projects/microsena/logwrapper/loggerwrapper_test.go:73","@timestamp":"2008-01-08T17:05:05","message":"t:test"}
+{"level":"error","caller":"Projects/microsena/logwrapper/loggerwrapper_test.go:73","@timestamp":"2008-01-08T17:05:05","message":"SetPrefix is not implemented"}
+{"level":"debug","@timestamp":"2008-01-08T17:05:05","message":"test"}
+{"level":"debug","@timestamp":"2008-01-08T17:05:05","message":"t:test"}
+{"level":"debug","@timestamp":"2008-01-08T17:05:05","message":"test"}
+{"level":"debug","@timestamp":"2008-01-08T17:05:05","message":"t:test"}
+{"level":"info","@timestamp":"2008-01-08T17:05:05","message":"test"}
+{"level":"info","@timestamp":"2008-01-08T17:05:05","message":"t:test"}
+{"level":"warn","@timestamp":"2008-01-08T17:05:05","message":"test"}
+{"level":"warn","@timestamp":"2008-01-08T17:05:05","message":"t:test"}
+{"level":"error","caller":"Projects/microsena/logwrapper/loggerwrapper_test.go:73","@timestamp":"2008-01-08T17:05:05","message":"test"}
+{"level":"error","caller":"Projects/microsena/logwrapper/loggerwrapper_test.go:73","@timestamp":"2008-01-08T17:05:05","message":"t:test"}
+{"level":"error","caller":"Projects/microsena/logwrapper/loggerwrapper_test.go:73","@timestamp":"2008-01-08T17:05:05","message":"SetPrefix is not implemented"}
+{"level":"debug","@timestamp":"2008-01-08T17:05:05","message":"test"}
+{"level":"debug","@timestamp":"2008-01-08T17:05:05","message":"t:test"}
+{"level":"debug","@timestamp":"2008-01-08T17:05:05","message":"test"}
+{"level":"debug","@timestamp":"2008-01-08T17:05:05","message":"t:test"}
+{"level":"info","@timestamp":"2008-01-08T17:05:05","message":"test"}
+{"level":"info","@timestamp":"2008-01-08T17:05:05","message":"t:test"}
+{"level":"warn","@timestamp":"2008-01-08T17:05:05","message":"test"}
+{"level":"warn","@timestamp":"2008-01-08T17:05:05","message":"t:test"}
+{"level":"error","caller":"Projects/microsena/logwrapper/loggerwrapper_test.go:73","@timestamp":"2008-01-08T17:05:05","message":"test"}
+{"level":"error","caller":"Projects/microsena/logwrapper/loggerwrapper_test.go:73","@timestamp":"2008-01-08T17:05:05","message":"t:test"}
+{"level":"error","caller":"Projects/microsena/logwrapper/loggerwrapper_test.go:73","@timestamp":"2008-01-08T17:05:05","message":"SetPrefix is not implemented"}
+{"level":"debug","@timestamp":"2008-01-08T17:05:05","message":"test"}
+{"level":"debug","@timestamp":"2008-01-08T17:05:05","message":"t:test"}
+{"level":"debug","@timestamp":"2008-01-08T17:05:05","message":"test"}
+{"level":"debug","@timestamp":"2008-01-08T17:05:05","message":"t:test"}
+{"level":"info","@timestamp":"2008-01-08T17:05:05","message":"test"}
+{"level":"info","@timestamp":"2008-01-08T17:05:05","message":"t:test"}
+{"level":"warn","@timestamp":"2008-01-08T17:05:05","message":"test"}
+{"level":"warn","@timestamp":"2008-01-08T17:05:05","message":"t:test"}
+{"level":"error","caller":"Projects/microsena/logwrapper/loggerwrapper_test.go:73","@timestamp":"2008-01-08T17:05:05","message":"test"}
+{"level":"error","caller":"Projects/microsena/logwrapper/loggerwrapper_test.go:73","@timestamp":"2008-01-08T17:05:05","message":"t:test"}
+{"level":"error","caller":"Projects/microsena/logwrapper/loggerwrapper_test.go:73","@timestamp":"2008-01-08T17:05:05","message":"SetPrefix is not implemented"}
+{"level":"debug","@timestamp":"2008-01-08T17:05:05","message":"test"}
+{"level":"debug","@timestamp":"2008-01-08T17:05:05","message":"t:test"}
+{"level":"debug","@timestamp":"2008-01-08T17:05:05","message":"test"}
+{"level":"debug","@timestamp":"2008-01-08T17:05:05","message":"t:test"}
+{"level":"info","@timestamp":"2008-01-08T17:05:05","message":"test"}
+{"level":"info","@timestamp":"2008-01-08T17:05:05","message":"t:test"}
+{"level":"warn","@timestamp":"2008-01-08T17:05:05","message":"test"}
+{"level":"warn","@timestamp":"2008-01-08T17:05:05","message":"t:test"}
+{"level":"error","caller":"Projects/microsena/logwrapper/loggerwrapper_test.go:73","@timestamp":"2008-01-08T17:05:05","message":"test"}
+{"level":"error","caller":"Projects/microsena/logwrapper/loggerwrapper_test.go:73","@timestamp":"2008-01-08T17:05:05","message":"t:test"}
