@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"io"
 
+	"github.com/labstack/gommon/log"
 	"github.com/rs/zerolog"
 )
 
@@ -77,6 +78,13 @@ func (lw *logWrapper) Debugf(format string, args ...interface{}) {
 	}
 }
 
+// Debugj log json debug
+func (lw *logWrapper) Debugj(j log.JSON) {
+	if e := logger.Debug(); e.Enabled() {
+		e.Msg(jsonMarshal(j))
+	}
+}
+
 // Info log info
 func (lw *logWrapper) Info(i ...interface{}) {
 	if e := logger.Info(); e.Enabled() {
@@ -91,6 +99,13 @@ func (lw *logWrapper) Infof(format string, args ...interface{}) {
 	}
 }
 
+// Infoj log json info
+func (lw *logWrapper) Infoj(j log.JSON) {
+	if e := logger.Info(); e.Enabled() {
+		e.Msg(jsonMarshal(j))
+	}
+}
+
 // Warn log warn
 func (lw *logWrapper) Warn(i ...interface{}) {
 	if e := logger.Warn(); e.Enabled() {
@@ -102,6 +117,13 @@ func (lw *logWrapper) Warn(i ...interface{}) {
 func (lw *logWrapper) Warnf(format string, args ...interface{}) {
 	if e := logger.Warn(); e.Enabled() {
 		e.Msg(fmt.Sprintf(format, args...))
+	}
+}
+
+// Warnj log json warn
+func (lw *logWrapper) Warnj(j log.JSON) {
+	if e := logger.Warn(); e.Enabled() {
+		e.Msg(jsonMarshal(j))
 	}
 }
 
@@ -126,6 +148,13 @@ func (lw *logWrapper) Errorf(format string, args ...interface{}) {
 	}
 }
 
+// Errorj log error in json
+func (lw *logWrapper) Errorj(j log.JSON) {
+	if e := logger.Error(); e.Enabled() {
+		e.Caller().Msg(jsonMarshal(j))
+	}
+}
+
 // Fatal log fatal
 func (lw *logWrapper) Fatal(i ...interface{}) {
 	if e := loggerFatal(); e.Enabled() {
@@ -140,6 +169,13 @@ func (lw *logWrapper) Fatalf(format string, args ...interface{}) {
 	}
 }
 
+// Fatalj log fatal in json
+func (lw *logWrapper) Fatalj(j log.JSON) {
+	if e := loggerFatal(); e.Enabled() {
+		e.Caller().Msg(jsonMarshal(j))
+	}
+}
+
 // Panic log panic
 func (lw *logWrapper) Panic(i ...interface{}) {
 	if e := loggerPanic(); e.Enabled() {
@@ -151,5 +187,12 @@ func (lw *logWrapper) Panic(i ...interface{}) {
 func (lw *logWrapper) Panicf(format string, args ...interface{}) {
 	if e := loggerPanic(); e.Enabled() {
 		e.Caller().Msg(fmt.Sprintf(format, args...))
+	}
+}
+
+// Panicj log panic in json
+func (lw *logWrapper) Panicj(j log.JSON) {
+	if e := loggerPanic(); e.Enabled() {
+		e.Caller().Msg(jsonMarshal(j))
 	}
 }

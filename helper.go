@@ -1,11 +1,14 @@
 package logwrapper
 
 import (
+	"encoding/json"
 	"fmt"
 	"os"
 	"strconv"
 	"strings"
 	"time"
+
+	"github.com/labstack/gommon/log"
 )
 
 func utcTimeFunc() time.Time {
@@ -39,4 +42,12 @@ func callerMarshalFunc(pc uintptr, file string, line int) string {
 		file = strings.Join(dirs[len(dirs)-4:], "/")
 	}
 	return file + ":" + strconv.Itoa(line)
+}
+
+func jsonMarshal(j log.JSON) string {
+	b, err := json.Marshal(j)
+	if err != nil {
+		return fmt.Sprintf("logwrapper, Marshal error : %s", err.Error())
+	}
+	return string(b)
 }
