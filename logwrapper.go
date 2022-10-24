@@ -10,6 +10,10 @@ import (
 // package wide logger variable, every log operation should use logger instance
 var logger zerolog.Logger
 
+// fatal and panic functions, for testing purposes, variable dependency injection
+var loggerFatal = logger.Fatal
+var loggerPanic = logger.Panic
+
 // wrapper type
 type logWrapper struct {
 	prefix string
@@ -124,28 +128,28 @@ func (lw *logWrapper) Errorf(format string, args ...interface{}) {
 
 // Fatal log fatal
 func (lw *logWrapper) Fatal(i ...interface{}) {
-	if e := logger.Fatal(); e.Enabled() {
+	if e := loggerFatal(); e.Enabled() {
 		e.Caller().Msg(fmt.Sprint(i...))
 	}
 }
 
 // Fatalf log fatal with format
 func (lw *logWrapper) Fatalf(format string, args ...interface{}) {
-	if e := logger.Fatal(); e.Enabled() {
+	if e := loggerFatal(); e.Enabled() {
 		e.Caller().Msg(fmt.Sprintf(format, args...))
 	}
 }
 
 // Panic log panic
 func (lw *logWrapper) Panic(i ...interface{}) {
-	if e := logger.Panic(); e.Enabled() {
+	if e := loggerPanic(); e.Enabled() {
 		e.Caller().Msg(fmt.Sprint(i...))
 	}
 }
 
 // Panicf log panic with format
 func (lw *logWrapper) Panicf(format string, args ...interface{}) {
-	if e := logger.Panic(); e.Enabled() {
+	if e := loggerPanic(); e.Enabled() {
 		e.Caller().Msg(fmt.Sprintf(format, args...))
 	}
 }

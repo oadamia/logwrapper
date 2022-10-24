@@ -4,6 +4,8 @@ import (
 	"errors"
 	"os"
 	"time"
+
+	"github.com/rs/zerolog"
 )
 
 func mock_config() Config {
@@ -33,5 +35,13 @@ func mock_openFileFunc(name string, flag int, perm os.FileMode) (*os.File, error
 		return nil, nil
 	}
 
-	return openFileFunc(name, flag, perm)
+	return os.OpenFile(name, flag, perm)
+}
+
+func mock_loggerFatal() *zerolog.Event {
+	return logger.WithLevel(zerolog.FatalLevel)
+}
+
+func mock_loggerPanic() *zerolog.Event {
+	return logger.WithLevel(zerolog.PanicLevel)
 }

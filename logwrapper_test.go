@@ -21,11 +21,12 @@ func (w *testWriter) Write(p []byte) (n int, err error) {
 }
 
 func TestMain(m *testing.M) {
+	setOpenFileFunction(mock_openFileFunc)
+
 	Init(mock_config())
 	setTimestampFunc(mock_timestampFunc)
 	setTimestampFieldName("@timestamp")
 	setCallerMarshalFunction(mock_callerMarshalFunc)
-	setOpenFileFunction(mock_openFileFunc)
 
 	os.Exit(m.Run())
 }
@@ -180,6 +181,46 @@ func TestWrapper(t *testing.T) {
 
 		wrapper.Errorf("t:%s", "test")
 		assert.Equal(test.Read("testdata/wrapperErrorf.json"), tw.output)
+	})
+
+	t.Run("Fatal", func(t *testing.T) {
+		assert := assert.New(t)
+		loggerFatal = mock_loggerFatal
+		defer func() {
+			loggerFatal = logger.Fatal
+		}()
+		wrapper.Fatal("fatal")
+		assert.Equal(test.Read("testdata/wrapperFatal.json"), tw.output)
+	})
+
+	t.Run("Fatalf", func(t *testing.T) {
+		assert := assert.New(t)
+		loggerFatal = mock_loggerFatal
+		defer func() {
+			loggerFatal = logger.Fatal
+		}()
+		wrapper.Fatalf("t:%s", "fatal")
+		assert.Equal(test.Read("testdata/wrapperFatalf.json"), tw.output)
+	})
+
+	t.Run("Panic", func(t *testing.T) {
+		assert := assert.New(t)
+		loggerPanic = mock_loggerPanic
+		defer func() {
+			loggerPanic = logger.Panic
+		}()
+		wrapper.Panic("panic")
+		assert.Equal(test.Read("testdata/wrapperPanic.json"), tw.output)
+	})
+
+	t.Run("Panicf", func(t *testing.T) {
+		assert := assert.New(t)
+		loggerPanic = mock_loggerPanic
+		defer func() {
+			loggerPanic = logger.Panic
+		}()
+		wrapper.Panicf("t:%s", "panic")
+		assert.Equal(test.Read("testdata/wrapperPanicf.json"), tw.output)
 	})
 
 }
