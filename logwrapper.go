@@ -50,6 +50,16 @@ func (lw *logWrapper) SetHeader(h string) {
 	}
 }
 
+// Level get logger level
+func (lw *logWrapper) Level() log.Lvl {
+	return levelZeroToEcho(zerolog.GlobalLevel())
+}
+
+// SetLevel set logger level
+func (lw *logWrapper) SetLevel(l log.Lvl) {
+	zerolog.SetGlobalLevel(levelEchoToZero(l))
+}
+
 // Print print log
 func (lw *logWrapper) Print(i ...interface{}) {
 	if e := logger.Debug(); e.Enabled() {
@@ -61,6 +71,13 @@ func (lw *logWrapper) Print(i ...interface{}) {
 func (lw *logWrapper) Printf(format string, args ...interface{}) {
 	if e := logger.Debug(); e.Enabled() {
 		e.Msg(fmt.Sprintf(format, args...))
+	}
+}
+
+// Printj print json log
+func (lw *logWrapper) Printj(j log.JSON) {
+	if e := logger.Debug(); e.Enabled() {
+		e.Msg(jsonMarshal(j))
 	}
 }
 

@@ -47,7 +47,7 @@ func callerMarshalFunc(pc uintptr, file string, line int) string {
 func jsonMarshal(j log.JSON) string {
 	b, err := json.Marshal(j)
 	if err != nil {
-		return fmt.Sprintf("logwrapper, Marshal error : %s", err.Error())
+		return fmt.Sprintf("logwrapper, Marshal error : %v", err)
 	}
 	return string(b)
 }

@@ -6,6 +6,7 @@ import (
 	"testing"
 	"time"
 
+	"github.com/labstack/gommon/log"
 	"github.com/oadamia/test"
 	"github.com/rs/zerolog"
 	"github.com/stretchr/testify/assert"
@@ -37,7 +38,8 @@ func TestWrapper(t *testing.T) {
 
 	t.Run("TimestampFunc", func(t *testing.T) {
 		assert := assert.New(t)
-		assert.GreaterOrEqual(time.Now().UTC(), utcTimeFunc())
+		testtime := utcTimeFunc()
+		assert.GreaterOrEqual(time.Now().UTC(), testtime)
 	})
 
 	t.Run("Config", func(t *testing.T) {
@@ -119,6 +121,20 @@ func TestWrapper(t *testing.T) {
 		assert.Equal(test.Read("testdata/Printf.json"), tw.output)
 	})
 
+	t.Run("Printj", func(t *testing.T) {
+		assert := assert.New(t)
+
+		wrapper.Printj(log.JSON{"name": "value", "key": "value"})
+		assert.Equal(test.Read("testdata/Printj.json"), tw.output)
+	})
+
+	t.Run("json marshal error", func(t *testing.T) {
+		assert := assert.New(t)
+
+		wrapper.Printj(log.JSON{"name": loggerFatal, "key": "value"})
+		assert.Equal(test.Read("testdata/PrintjJsonError.json"), test.RemoveEnterAndTabs(tw.output))
+	})
+
 	t.Run("Debug", func(t *testing.T) {
 		assert := assert.New(t)
 
@@ -131,6 +147,13 @@ func TestWrapper(t *testing.T) {
 
 		wrapper.Debugf("t:%s", "test")
 		assert.Equal(test.Read("testdata/wrapperDebugf.json"), tw.output)
+	})
+
+	t.Run("Debugj", func(t *testing.T) {
+		assert := assert.New(t)
+
+		wrapper.Debugj(log.JSON{"name": "value", "key": "value"})
+		assert.Equal(test.Read("testdata/wrapperDebugj.json"), tw.output)
 	})
 
 	t.Run("Info", func(t *testing.T) {
@@ -147,6 +170,13 @@ func TestWrapper(t *testing.T) {
 		assert.Equal(test.Read("testdata/wrapperInfof.json"), tw.output)
 	})
 
+	t.Run("Infoj", func(t *testing.T) {
+		assert := assert.New(t)
+
+		wrapper.Infoj(log.JSON{"name": "value", "key": "value"})
+		assert.Equal(test.Read("testdata/wrapperInfoj.json"), tw.output)
+	})
+
 	t.Run("Warn", func(t *testing.T) {
 		assert := assert.New(t)
 
@@ -161,12 +191,19 @@ func TestWrapper(t *testing.T) {
 		assert.Equal(test.Read("testdata/wrapperWarnf.json"), tw.output)
 	})
 
+	t.Run("Warnj", func(t *testing.T) {
+		assert := assert.New(t)
+
+		wrapper.Warnj(log.JSON{"name": "value", "key": "value"})
+		assert.Equal(test.Read("testdata/wrapperWarnj.json"), tw.output)
+	})
+
 	t.Run("Err", func(t *testing.T) {
 		assert := assert.New(t)
 
 		wrapper.Err(nil)
 		//because writer is not overwriten
-		assert.Equal(test.Read("testdata/wrapperWarnf.json"), tw.output)
+		assert.Equal(test.Read("testdata/wrapperWarnj.json"), tw.output)
 	})
 
 	t.Run("Error", func(t *testing.T) {
@@ -181,6 +218,13 @@ func TestWrapper(t *testing.T) {
 
 		wrapper.Errorf("t:%s", "test")
 		assert.Equal(test.Read("testdata/wrapperErrorf.json"), tw.output)
+	})
+
+	t.Run("Errorj", func(t *testing.T) {
+		assert := assert.New(t)
+
+		wrapper.Errorj(log.JSON{"name": "value", "key": "value"})
+		assert.Equal(test.Read("testdata/wrapperErrorj.json"), tw.output)
 	})
 
 	t.Run("Fatal", func(t *testing.T) {
@@ -203,6 +247,16 @@ func TestWrapper(t *testing.T) {
 		assert.Equal(test.Read("testdata/wrapperFatalf.json"), tw.output)
 	})
 
+	t.Run("Fatalj", func(t *testing.T) {
+		assert := assert.New(t)
+		loggerFatal = mock_loggerFatal
+		defer func() {
+			loggerFatal = logger.Fatal
+		}()
+		wrapper.Fatalj(log.JSON{"name": "value", "key": "value"})
+		assert.Equal(test.Read("testdata/wrapperFatalj.json"), tw.output)
+	})
+
 	t.Run("Panic", func(t *testing.T) {
 		assert := assert.New(t)
 		loggerPanic = mock_loggerPanic
@@ -221,6 +275,82 @@ func TestWrapper(t *testing.T) {
 		}()
 		wrapper.Panicf("t:%s", "panic")
 		assert.Equal(test.Read("testdata/wrapperPanicf.json"), tw.output)
+	})
+
+	t.Run("Panicj", func(t *testing.T) {
+		assert := assert.New(t)
+		loggerPanic = mock_loggerPanic
+		defer func() {
+			loggerPanic = logger.Panic
+		}()
+		wrapper.Panicj(log.JSON{"name": "value", "key": "value"})
+		assert.Equal(test.Read("testdata/wrapperPanicj.json"), tw.output)
+	})
+}
+
+func TestLevel(t *testing.T) {
+
+	t.Run("Level Debug", func(t *testing.T) {
+		assert := assert.New(t)
+
+		wrapper.SetLevel(log.DEBUG)
+		assert.Equal(log.DEBUG, wrapper.Level())
+	})
+
+	t.Run("Level Info", func(t *testing.T) {
+		assert := assert.New(t)
+
+		wrapper.SetLevel(log.INFO)
+		assert.Equal(log.INFO, wrapper.Level())
+	})
+
+	t.Run("Level Warn", func(t *testing.T) {
+		assert := assert.New(t)
+
+		wrapper.SetLevel(log.WARN)
+		assert.Equal(log.WARN, wrapper.Level())
+	})
+
+	t.Run("Level Error", func(t *testing.T) {
+		assert := assert.New(t)
+
+		wrapper.SetLevel(log.ERROR)
+		assert.Equal(log.ERROR, wrapper.Level())
+	})
+
+	t.Run("Level Fatal", func(t *testing.T) {
+		assert := assert.New(t)
+
+		wrapper.SetLevel(log.Lvl(7))
+		assert.Equal(log.Lvl(7), wrapper.Level())
+	})
+
+	t.Run("Level Panic", func(t *testing.T) {
+		assert := assert.New(t)
+
+		wrapper.SetLevel(log.Lvl(6))
+		assert.Equal(log.Lvl(6), wrapper.Level())
+	})
+
+	t.Run("Level NoLevel", func(t *testing.T) {
+		assert := assert.New(t)
+
+		wrapper.SetLevel(log.OFF)
+		assert.Equal(log.OFF, wrapper.Level())
+	})
+
+	t.Run("Level Disabled", func(t *testing.T) {
+		assert := assert.New(t)
+
+		wrapper.SetLevel(log.OFF)
+		assert.Equal(log.OFF, wrapper.Level())
+	})
+
+	t.Run("Level Default", func(t *testing.T) {
+		assert := assert.New(t)
+
+		wrapper.SetLevel(log.Lvl(16))
+		assert.Equal(log.INFO, wrapper.Level())
 	})
 
 }
