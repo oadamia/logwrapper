@@ -1,11 +1,8 @@
 package logwrapper
 
 import (
-	"fmt"
 	"io"
 	"os"
-	"strconv"
-	"strings"
 	"time"
 
 	"github.com/rs/zerolog"
@@ -13,6 +10,7 @@ import (
 
 var multiWriter zerolog.LevelWriter
 var writers []io.Writer
+var openFileFunc = os.OpenFile
 
 // Config wrapper configuration
 type Config struct {
@@ -60,27 +58,13 @@ func setTimestampFunc(timeFunc func() time.Time) {
 	zerolog.TimestampFunc = timeFunc
 }
 
-func appendOutput(output io.Writer) {
-	writers = append(writers, output)
-	multiWriter = zerolog.MultiLevelWriter(writers...)
-	logger = zerolog.New(multiWriter).With().Timestamp().Logger()
-
+func setOpenFileFunction(openFunc func(name string, flag int, perm os.FileMode) (*os.File, error)) {
+	openFileFunc = openFunc
 }
 
-func setConsoleOutput(console bool) {
-	if console {
-		appendOutput(zerolog.ConsoleWriter{Out: os.Stdout})
-	}
-}
-
-func setFileOutput(conf Config) error {
-	if conf.File {
-		file, err := os.OpenFile(fileName(conf.FileName, conf.FilePath), os.O_WRONLY|os.O_CREATE|os.O_APPEND, 0644)
-		if err != nil {
-			return err
-		}
-
-		_, err = file.Stat()
+func setFileOutput(c Config) error {
+	if c.File {
+		file, err := openFile(c.FileName, c.FilePath)
 		if err != nil {
 			return err
 		}
@@ -89,18 +73,15 @@ func setFileOutput(conf Config) error {
 	return nil
 }
 
-func fileName(filename string, filepath string) string {
-	if len(filepath) > 0 {
-		return fmt.Sprint(filepath, "/", filename)
+func setConsoleOutput(console bool) {
+	if console {
+		appendOutput(zerolog.ConsoleWriter{Out: os.Stdout})
 	}
-	return filename
 }
 
-func callerMarshalFunc(pc uintptr, file string, line int) string {
-	dirs := strings.Split(file, "/")
+func appendOutput(output io.Writer) {
+	writers = append(writers, output)
+	multiWriter = zerolog.MultiLevelWriter(writers...)
+	logger = zerolog.New(multiWriter).With().Timestamp().Logger()
 
-	if len(dirs) > 4 {
-		file = strings.Join(dirs[len(dirs)-4:], "/")
-	}
-	return file + ":" + strconv.Itoa(line)
 }

@@ -1,9 +1,9 @@
 package logwrapper
 
 import (
+	"errors"
 	"os"
 	"testing"
-	"time"
 
 	"github.com/oadamia/test"
 	"github.com/rs/zerolog"
@@ -20,50 +20,54 @@ func (w *testWriter) Write(p []byte) (n int, err error) {
 }
 
 func TestMain(m *testing.M) {
-	Init(config())
+	Init(mock_config())
 	setTimestampFunc(mock_timestampFunc)
 	setTimestampFieldName("@timestamp")
 	setCallerMarshalFunction(mock_callerMarshalFunc)
+	setOpenFileFunction(mock_openFileFunc)
 
 	os.Exit(m.Run())
-}
-
-func config() Config {
-	return Config{
-		Level:           "trace",
-		Console:         true,
-		File:            true,
-		FileName:        "tester.log",
-		FilePath:        "",
-		TimeFieldFormat: "2006-01-02T15:04:05.999999",
-	}
-}
-
-func mock_timestampFunc() time.Time {
-	return time.Date(2008, 1, 8, 17, 5, 05, 0, time.UTC)
-}
-
-func mock_callerMarshalFunc(pc uintptr, file string, line int) string {
-	file = "/Users/oto/Projects/microsena/logwrapper/loggerwrapper_test.go"
-	return callerMarshalFunc(pc, file, 73)
-}
-
-func TestLoggerPackage(t *testing.T) {
-
-	t.Run("Config", func(t *testing.T) {
-		assert := assert.New(t)
-		c := config()
-		wrapper = Wrapper()
-		assert.Equal(c.Level, logger.GetLevel().String())
-		assert.Equal(len(writers), 2)
-		assert.Equal(c.TimeFieldFormat, zerolog.TimeFieldFormat)
-		assert.Equal("tester.log", fileName(c.FileName, c.FilePath))
-	})
 }
 
 func TestWrapper(t *testing.T) {
 
 	tw := new(testWriter)
+
+	t.Run("Config open file Error", func(t *testing.T) {
+		assert := assert.New(t)
+		config := mock_config()
+		config.FileName = "error"
+		err := setFileOutput(config)
+		if assert.Error(err) {
+			assert.EqualError(err, "open file error")
+		}
+	})
+
+	t.Run("Config file stat Error", func(t *testing.T) {
+		assert := assert.New(t)
+		config := mock_config()
+		config.FileName = "Stat error"
+		err := setFileOutput(config)
+		if assert.Error(err) {
+			assert.EqualError(err, "invalid argument")
+		}
+	})
+
+	t.Run("Config", func(t *testing.T) {
+		assert := assert.New(t)
+
+		assert.Equal("trace", logger.GetLevel().String())
+		assert.Equal(2, len(writers))
+		assert.Equal("2006-01-02T15:04:05.999999", zerolog.TimeFieldFormat)
+		assert.Equal("test/tester.log", fileName("tester.log", "test"))
+	})
+
+	t.Run("wrapper", func(t *testing.T) {
+		assert := assert.New(t)
+
+		assert.Equal(wrapper, Wrapper())
+
+	})
 
 	t.Run("Output", func(t *testing.T) {
 		assert := assert.New(t)
@@ -77,7 +81,21 @@ func TestWrapper(t *testing.T) {
 
 		wrapper.SetPrefix("Prefix")
 		assert.Equal("Prefix", wrapper.Prefix())
-		// TODO Check if Prefix is written
+
+	})
+
+	t.Run("Header", func(t *testing.T) {
+		assert := assert.New(t)
+
+		wrapper.SetHeader("Header")
+		assert.Equal("{\"level\":\"error\",\"@timestamp\":\"2008-01-08T17:05:05\",\"message\":\"SetHeader is not implemented\"}\n", tw.output)
+	})
+
+	t.Run("err", func(t *testing.T) {
+		assert := assert.New(t)
+
+		wrapper.Err(errors.New("error"))
+		assert.Equal("{\"level\":\"error\",\"caller\":\"Projects/microsena/logwrapper/loggerwrapper_test.go:73\",\"@timestamp\":\"2008-01-08T17:05:05\",\"message\":\"error\"}\n", tw.output)
 	})
 
 	t.Run("Print", func(t *testing.T) {
