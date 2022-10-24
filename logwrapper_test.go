@@ -4,6 +4,7 @@ import (
 	"errors"
 	"os"
 	"testing"
+	"time"
 
 	"github.com/oadamia/test"
 	"github.com/rs/zerolog"
@@ -33,6 +34,20 @@ func TestWrapper(t *testing.T) {
 
 	tw := new(testWriter)
 
+	t.Run("TimestampFunc", func(t *testing.T) {
+		assert := assert.New(t)
+		assert.GreaterOrEqual(time.Now().UTC(), utcTimeFunc())
+	})
+
+	t.Run("Config", func(t *testing.T) {
+		assert := assert.New(t)
+
+		assert.Equal("trace", logger.GetLevel().String())
+		assert.Equal(2, len(writers))
+		assert.Equal("2006-01-02T15:04:05.999999", zerolog.TimeFieldFormat)
+		assert.Equal("test/tester.log", fileName("tester.log", "test"))
+	})
+
 	t.Run("Config open file Error", func(t *testing.T) {
 		assert := assert.New(t)
 		config := mock_config()
@@ -51,15 +66,6 @@ func TestWrapper(t *testing.T) {
 		if assert.Error(err) {
 			assert.EqualError(err, "invalid argument")
 		}
-	})
-
-	t.Run("Config", func(t *testing.T) {
-		assert := assert.New(t)
-
-		assert.Equal("trace", logger.GetLevel().String())
-		assert.Equal(2, len(writers))
-		assert.Equal("2006-01-02T15:04:05.999999", zerolog.TimeFieldFormat)
-		assert.Equal("test/tester.log", fileName("tester.log", "test"))
 	})
 
 	t.Run("wrapper", func(t *testing.T) {
@@ -102,56 +108,56 @@ func TestWrapper(t *testing.T) {
 		assert := assert.New(t)
 
 		wrapper.Print("test")
-		assert.Equal(test.Read("json/Print.json"), tw.output)
+		assert.Equal(test.Read("testdata/Print.json"), tw.output)
 	})
 
 	t.Run("Printf", func(t *testing.T) {
 		assert := assert.New(t)
 
 		wrapper.Printf("t:%s", "test")
-		assert.Equal(test.Read("json/Printf.json"), tw.output)
+		assert.Equal(test.Read("testdata/Printf.json"), tw.output)
 	})
 
 	t.Run("Debug", func(t *testing.T) {
 		assert := assert.New(t)
 
 		wrapper.Debug("test")
-		assert.Equal(test.Read("json/wrapperDebug.json"), tw.output)
+		assert.Equal(test.Read("testdata/wrapperDebug.json"), tw.output)
 	})
 
 	t.Run("Debugf", func(t *testing.T) {
 		assert := assert.New(t)
 
 		wrapper.Debugf("t:%s", "test")
-		assert.Equal(test.Read("json/wrapperDebugf.json"), tw.output)
+		assert.Equal(test.Read("testdata/wrapperDebugf.json"), tw.output)
 	})
 
 	t.Run("Info", func(t *testing.T) {
 		assert := assert.New(t)
 
 		wrapper.Info("test")
-		assert.Equal(test.Read("json/wrapperInfo.json"), tw.output)
+		assert.Equal(test.Read("testdata/wrapperInfo.json"), tw.output)
 	})
 
 	t.Run("Infof", func(t *testing.T) {
 		assert := assert.New(t)
 
 		wrapper.Infof("t:%s", "test")
-		assert.Equal(test.Read("json/wrapperInfof.json"), tw.output)
+		assert.Equal(test.Read("testdata/wrapperInfof.json"), tw.output)
 	})
 
 	t.Run("Warn", func(t *testing.T) {
 		assert := assert.New(t)
 
 		wrapper.Warn("test")
-		assert.Equal(test.Read("json/wrapperWarn.json"), tw.output)
+		assert.Equal(test.Read("testdata/wrapperWarn.json"), tw.output)
 	})
 
 	t.Run("Warnf", func(t *testing.T) {
 		assert := assert.New(t)
 
 		wrapper.Warnf("t:%s", "test")
-		assert.Equal(test.Read("json/wrapperWarnf.json"), tw.output)
+		assert.Equal(test.Read("testdata/wrapperWarnf.json"), tw.output)
 	})
 
 	t.Run("Err", func(t *testing.T) {
@@ -159,21 +165,21 @@ func TestWrapper(t *testing.T) {
 
 		wrapper.Err(nil)
 		//because writer is not overwriten
-		assert.Equal(test.Read("json/wrapperWarnf.json"), tw.output)
+		assert.Equal(test.Read("testdata/wrapperWarnf.json"), tw.output)
 	})
 
 	t.Run("Error", func(t *testing.T) {
 		assert := assert.New(t)
 
 		wrapper.Error("test")
-		assert.Equal(test.Read("json/wrapperError.json"), tw.output)
+		assert.Equal(test.Read("testdata/wrapperError.json"), tw.output)
 	})
 
 	t.Run("Errorf", func(t *testing.T) {
 		assert := assert.New(t)
 
 		wrapper.Errorf("t:%s", "test")
-		assert.Equal(test.Read("json/wrapperErrorf.json"), tw.output)
+		assert.Equal(test.Read("testdata/wrapperErrorf.json"), tw.output)
 	})
 
 }
