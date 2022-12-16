@@ -13,22 +13,20 @@ var writers []io.Writer
 var openFileFunc = os.OpenFile
 
 // Config wrapper configuration
-type Config struct {
-	Level           string
-	File            bool
-	FilePath        string
-	FileName        string
-	Console         bool
-	TimeFieldFormat string
+type Config interface {
+	LogLevel() string
+	LogFileName() string
+	LogConsole() bool
+	LogTimeFormat() string
 }
 
 func configure(c Config) error {
-	setLevel(c.Level)
-	setTimeFieldFormat(c.TimeFieldFormat)
+	setLevel(c.LogLevel())
+	setTimeFieldFormat(c.LogTimeFormat())
 	setCallerMarshalFunction(callerMarshalFunc)
 	setCallerSkipFrameCount(3)
 	setTimestampFunc(utcTimeFunc)
-	setConsoleOutput(c.Console)
+	setConsoleOutput(c.LogConsole())
 	setTimestampFieldName("@timestamp")
 	return setFileOutput(c)
 }
@@ -63,8 +61,8 @@ func setOpenFileFunction(openFunc func(name string, flag int, perm os.FileMode) 
 }
 
 func setFileOutput(c Config) error {
-	if c.File {
-		file, err := openFile(c.FileName, c.FilePath)
+	if c.LogFileName() != "" {
+		file, err := openFile(c.LogFileName(), "")
 		if err != nil {
 			return err
 		}

@@ -7,6 +7,7 @@ import (
 	"time"
 
 	"github.com/labstack/gommon/log"
+	"github.com/oadamia/logwrapper/mock"
 	"github.com/oadamia/test"
 	"github.com/rs/zerolog"
 	"github.com/stretchr/testify/assert"
@@ -22,12 +23,14 @@ func (w *testWriter) Write(p []byte) (n int, err error) {
 }
 
 func TestMain(m *testing.M) {
-	setOpenFileFunction(mock_openFileFunc)
 
-	Init(mock_config())
-	setTimestampFunc(mock_timestampFunc)
+	setOpenFileFunction(mock.OpenFileFunc)
+
+	Init(mock.NewConfig())
+	setTimestampFunc(mock.TimestampFunc)
 	setTimestampFieldName("@timestamp")
-	setCallerMarshalFunction(mock_callerMarshalFunc)
+	mock.RealCallerMarshalFunc = callerMarshalFunc
+	setCallerMarshalFunction(mock.CallerMarshalFunc)
 
 	os.Exit(m.Run())
 }
@@ -53,7 +56,7 @@ func TestWrapper(t *testing.T) {
 
 	t.Run("Config open file Error", func(t *testing.T) {
 		assert := assert.New(t)
-		config := mock_config()
+		config := mock.NewConfig()
 		config.FileName = "error"
 		err := setFileOutput(config)
 		if assert.Error(err) {
@@ -63,7 +66,7 @@ func TestWrapper(t *testing.T) {
 
 	t.Run("Config file stat Error", func(t *testing.T) {
 		assert := assert.New(t)
-		config := mock_config()
+		config := mock.NewConfig()
 		config.FileName = "Stat error"
 		err := setFileOutput(config)
 		if assert.Error(err) {
@@ -353,4 +356,12 @@ func TestLevel(t *testing.T) {
 		assert.Equal(log.INFO, wrapper.Level())
 	})
 
+}
+
+func mock_loggerFatal() *zerolog.Event {
+	return logger.WithLevel(zerolog.FatalLevel)
+}
+
+func mock_loggerPanic() *zerolog.Event {
+	return logger.WithLevel(zerolog.PanicLevel)
 }
